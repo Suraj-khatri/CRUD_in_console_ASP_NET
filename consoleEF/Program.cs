@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace consoleEF
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Service service = new Service();
+            bool isTrue = true;
+            while(isTrue)
+            {
+                Console.WriteLine("Choose");
+                Console.Write("1.Add");
+                Console.WriteLine("2.Display Students");
+                Console.WriteLine("3.Update Students");
+                Console.WriteLine("4.Delete Students");
+                Console.WriteLine("0.Exit");
+                var input = Console.ReadLine();
+                if (input == "1")
+                {
+                    var stud = new Student();
+                    stud.Id = Guid.NewGuid();
+                    Console.WriteLine("enter student name:");
+                    stud.Name = Console.ReadLine();
+                    service.Add(stud);
+                }
+                else if(input == "2")
+                {
+                    var students = service.GetAll();
+                    foreach(var student in students)
+                    {
+                        Console.WriteLine($"Student Id ={student.Id}");
+                        Console.WriteLine($"Student Name ={student.Name}");
+                    }
+                }
+                else if(input == "3")
+                {
+                    var stud = new Student();
+                    Console.WriteLine("enter id to update");
+                    stud.Id=Guid.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter new name:");
+                    stud.Name = Console.ReadLine();
+
+                    service.Update(stud);
+                    Console.WriteLine("updated");
+                }
+                else if(input =="4")
+                {
+                    var stud = new Student();
+
+                    Console.WriteLine("enter student id to delete");
+                    stud.Id = Guid.Parse(Console.ReadLine());
+                    service.Delete(stud);
+                }
+                else if(input == "0")
+                {
+                    isTrue = false;
+                }
+            }
+            
+            
+        }
+    }
+}
