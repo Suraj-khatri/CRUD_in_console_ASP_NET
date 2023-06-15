@@ -16,7 +16,7 @@ namespace consoleEF
             while(isTrue)
             {
                 Console.WriteLine("Choose");
-                Console.Write("1.Add");
+                Console.WriteLine("1.Add");
                 Console.WriteLine("2.Display Students");
                 Console.WriteLine("3.Update Students");
                 Console.WriteLine("4.Delete Students");
@@ -29,14 +29,17 @@ namespace consoleEF
                     Console.WriteLine("enter student name:");
                     stud.Name = Console.ReadLine();
                     service.Add(stud);
+                    Console.WriteLine("Added succesfully");
                 }
                 else if(input == "2")
                 {
                     var students = service.GetAll();
                     foreach(var student in students)
                     {
+                        Console.WriteLine("-------------------------------");
                         Console.WriteLine($"Student Id ={student.Id}");
                         Console.WriteLine($"Student Name ={student.Name}");
+                        Console.WriteLine("-------------------------------");
                     }
                 }
                 else if(input == "3")
@@ -57,6 +60,7 @@ namespace consoleEF
                     Console.WriteLine("enter student id to delete");
                     stud.Id = Guid.Parse(Console.ReadLine());
                     service.Delete(stud);
+                    Console.WriteLine("Deleted successfully");
                 }
                 else if(input == "0")
                 {
