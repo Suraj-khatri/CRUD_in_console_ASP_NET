@@ -46,20 +46,27 @@ namespace consoleEF
                 {
                     var stud = new Student();
                     Console.WriteLine("enter id to update");
-                    stud.Id=Guid.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter new name:");
-                    stud.Name = Console.ReadLine();
-
-                    service.Update(stud);
-                    Console.WriteLine("updated");
+                    var id = Console.ReadLine();
+                    var isSuccess = Guid.TryParse(id, out Guid result);
+                    if (isSuccess)
+                    {
+                        Console.WriteLine("Enter new name:");
+                        stud.Name = Console.ReadLine();
+                        service.Update(stud);
+                        Console.WriteLine("updated");
+                    }
+                    else
+                    {
+                        Console.WriteLine("you have entered wrong Id");
+                    }
+                    
                 }
                 else if(input =="4")
                 {
-                    var stud = new Student();
 
                     Console.WriteLine("enter student id to delete");
-                    stud.Id = Guid.Parse(Console.ReadLine());
-                    service.Delete(stud);
+                    var id = Guid.Parse(Console.ReadLine());
+                    service.Delete(id);
                     Console.WriteLine("Deleted successfully");
                 }
                 else if(input == "0")

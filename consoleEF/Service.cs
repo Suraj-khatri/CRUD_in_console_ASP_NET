@@ -26,14 +26,22 @@ namespace consoleEF
         public void Update(Student student)
         {
             var stud = _context.Students.FirstOrDefault(x => x.Id == student.Id);
+            if (stud == null)
+            {
+                Console.WriteLine("Student not found");
+            }
             stud.Name = student.Name;
             _context.Students.Update(stud);
             _context.SaveChanges();
             
         }
-        public void Delete(Student student)
+        public void Delete(Guid id)
         {
-            var stud = _context.Students.Find(student.Id);
+            var stud = _context.Students.FirstOrDefault(x => x.Id == id);
+            if (stud == null)
+            {
+                Console.WriteLine("Student not found");
+            }
             _context.Students.Remove(stud);
             _context.SaveChanges();
         }
